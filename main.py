@@ -14,7 +14,7 @@ async def main():
     # Конфигурируем логирование
     logging.basicConfig(
         level=logging.INFO,
-        format='%(filename)s:%(lineno)d #%(levelname)-8s '
+        format='%(filename)s:%(lineno)d -8s '
                '[%(asctime)s] - %(name)s - %(message)s')
 
     # Выводим в консоль информацию о начале запуска бота
@@ -24,7 +24,7 @@ async def main():
     config: Config = load_config()
 
     # Инициализируем бот и диспетчер
-    bot = Bot(token=config.tg_bot.token, 
+    bot = Bot(token=config.tg_bot.token,
               parse_mode='HTML')
     dp = Dispatcher()
 

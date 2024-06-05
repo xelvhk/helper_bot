@@ -1,4 +1,4 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 from lexicon.lexicon_ru import LEXICON_RU
 
@@ -16,19 +16,17 @@ helper_kb = ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
-# Создаем объекты инлайн-кнопок для задач
 task_button_1 = KeyboardButton(text=LEXICON_RU['add_task'])
-
 task_button_2 = KeyboardButton(text=LEXICON_RU['show_task'])
-
 task_button_3 = KeyboardButton(text=LEXICON_RU['back'])
 
 # Создаем объект клавиатуры для задач
-task_kb = ReplyKeyboardMarkup(
+tasks_kb = ReplyKeyboardMarkup(
     keyboard=[[task_button_1],
               [task_button_2],
               [task_button_3]],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Используйте /add_task для добавления задачи, /list для просмотра задач и /clear для удаления всех задач.'
 )
 
 weather_button_1 = KeyboardButton(text=LEXICON_RU['ask_weather'])
@@ -39,4 +37,15 @@ weather_kb = ReplyKeyboardMarkup(
               [weather_button_2]],
     resize_keyboard=True,
     input_field_placeholder='Нажмите узнать погоду'
+)
+
+happy_button_1 = KeyboardButton(text=LEXICON_RU['gen_joke'])
+happy_button_2 = KeyboardButton(text=LEXICON_RU['back'])
+
+
+happy_kb = ReplyKeyboardMarkup(
+    keyboard=[[happy_button_1],
+              [happy_button_2]],
+    resize_keyboard=True,
+    input_field_placeholder='Нажмите кнопку, чтобы сгенерировать шутку'
 )
