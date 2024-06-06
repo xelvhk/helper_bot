@@ -12,13 +12,15 @@ bot = Bot
 # Этот хэндлер срабатывает на команду /start
 @router.message(CommandStart())
 async def process_start_command(message: Message):
-    await message.answer(text=LEXICON_RU['/start'], reply_markup=helper_kb)
+    await message.answer(text=LEXICON_RU['/start'],
+                         reply_markup=helper_kb)
 
 
 # Этот хэндлер срабатывает на команду /help
 @router.message(Command(commands='help'))
 async def process_help_command(message: Message):
-    await message.answer(text=LEXICON_RU['/help'], reply_markup=helper_kb)
+    await message.answer(text=LEXICON_RU['/help'],
+                         reply_markup=helper_kb)
 
 
 # Эти хэндлеры срабатывают на любую из кнопок
@@ -56,9 +58,16 @@ async def process_placeholder_command(message: Message):
 
 @router.message(F.text.in_([LEXICON_RU['ask_weather']]))
 async def send_weather(message: Message):
-    city = 'Saint Petersburg'  # По умолчанию - Петербург
+    city = 'Saint-Petersburg'  # По умолчанию - Петербург
     weather_report = get_weather(city)
     await message.reply(weather_report)
+
+# locations = {}
+
+# @router.message(F.text.in_([LEXICON_RU['ask_weather']]))
+# async def send_weather(message: Message):
+#     weather_report = get_weather(latitude, longitude)
+#     await message.reply(weather_report)
 
 
 @router.message(F.text.in_([LEXICON_RU['gen_joke']]))
@@ -79,7 +88,7 @@ async def add_task(message: Message):
         user_tasks[user_id].append(task)
         await message.reply(f"Задача '{task}' добавлена.")
     else:
-        await message.reply("Кажется, задача пустая. Введите задачу после команды /add_task.")
+        await message.reply("Кажется, задача пустая. Введите задачу после команды /add_task")
 
 
 @router.message(Command(commands='list'))

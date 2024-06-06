@@ -1,6 +1,7 @@
 import random
 from lexicon.lexicon_ru import LEXICON_RU
 from keyboards.keyboards import tasks_kb, weather_kb, happy_kb
+from handlers.user_handlers import *
 import requests
 
 
@@ -24,12 +25,11 @@ def select_point(user_answer: str) -> str:
         else:
             return LEXICON_RU['other_answer']
 
-
 # Прогноз погоды по API
 def get_weather(city: str) -> str:
     # Координаты города: Saint Petersburg, Russia
-    latitude = 59.9375
-    longitude = 30.3086
+    longitude = 30.3141
+    latitude = 59.9386
 
     # Получаем данные по Open-Meteo API
     weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true"
@@ -86,17 +86,30 @@ def get_weather(city: str) -> str:
 
     return weather_report
 
+#Генерация шуток v.1
+# words_list = [
+#     "шутку", "информатику", "телеграм", "бот", "айограм", "коворкинг", "программирование",
+#     "python", "код", "разработку", "гитхаб", "интернет", "плохую погоду",
+#     "двойку по информатике", "несмешную шутку", "vs code"
+# ]
 
-words_list = [
-    "шутку", "информатику", "телеграм", "бот", "айограм", "коворкинг", "программирование",
-    "python", "код", "разработку", "гитхаб", "интернет", "плохую погоду",
-    "двойку по информатике", "несмешную шутку", "vs code"
-]
 
+# def get_joke():
+#     selected_words = random.simple(words_list, 3)
+#     joke_one = f"Что получится, если соединить {selected_words[0]} и {selected_words[1]}?"
+#     joke_two = f"Немного {selected_words[2]} и много потраченного времени!"
+#     return joke_one + joke_two
+
+#Генерация шуток v.2
+words1 = ['человек', 'столб', 'дом']
+words2 = ['шёл', 'летел', 'плыл']
+words3 = ['под водой', 'по лесу', 'высоко над облаками']
+words4 = ['и упал', 'и споткнулся', 'и стал рыбой']
 
 def get_joke():
-    # Выбираем три случайных слова из списка
-    selected_words = random.sample(words_list, 3)
-    joke_one = f"Что получится, если соединить {selected_words[0]} и {selected_words[1]}?"
-    joke_two = f"Немного {selected_words[2]} и много потраченного времени!"
-    return joke_one + joke_two
+    selected_1 = ' '.join(random.sample(words1, 1))
+    selected_2 = ' '.join(random.sample(words2, 1))
+    selected_3 = ' '.join(random.sample(words3, 1))
+    selected_4 = ' '.join(random.sample(words4, 1))
+    joke = f"{selected_1} {selected_2} {selected_3} {selected_4}"
+    return joke
