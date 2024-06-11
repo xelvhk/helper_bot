@@ -75,6 +75,12 @@ async def send_joke(message: Message):
     joke = get_joke()
     await message.reply(joke)
 
+
+# @router.message(F.text.in_([LEXICON_RU['get_cat']]))
+# async def send_joke(message: Message):
+#     joke = get_joke()
+#     await message.reply(joke)
+
 user_tasks = {}
 
 

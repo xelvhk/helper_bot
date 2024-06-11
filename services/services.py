@@ -1,7 +1,6 @@
 import random
 from lexicon.lexicon_ru import LEXICON_RU
 from keyboards.keyboards import tasks_kb, weather_kb, happy_kb
-from handlers.user_handlers import *
 import requests
 
 
@@ -24,6 +23,7 @@ def select_point(user_answer: str) -> str:
             return happy_kb
         else:
             return LEXICON_RU['other_answer']
+
 
 # Прогноз погоды по API
 def get_weather(city: str) -> str:
@@ -67,8 +67,8 @@ def get_weather(city: str) -> str:
             80: "Небольшие ливни. Когда льёт как из ведра, но маленького",
             81: "Умеренные ливни. Когда льёт как из ведра, среднего",
             82: "Сильные ливни. Когда льёт как из ведра, большого",
-            85: "Небольшие снеговые ливни",
-            86: "Сильные снеговые ливни. Ужас какой-то",
+            85: "Снегопад и ливень",
+            86: "Сильный снегопад и ливень. Ужас какой-то",
             95: "Гроза. Очень шумно",
             96: "Гроза с легким градом. Как будто одной грозы мало",
             99: "Гроза с сильным градом. Шумно и больно",
@@ -86,7 +86,7 @@ def get_weather(city: str) -> str:
 
     return weather_report
 
-#Генерация шуток v.1
+# Генерация шуток v.1
 # words_list = [
 #     "шутку", "информатику", "телеграм", "бот", "айограм", "коворкинг", "программирование",
 #     "python", "код", "разработку", "гитхаб", "интернет", "плохую погоду",
@@ -100,11 +100,12 @@ def get_weather(city: str) -> str:
 #     joke_two = f"Немного {selected_words[2]} и много потраченного времени!"
 #     return joke_one + joke_two
 
-#Генерация шуток v.2
+# Генерация шуток v.2
 words1 = ['человек', 'столб', 'дом']
 words2 = ['шёл', 'летел', 'плыл']
 words3 = ['под водой', 'по лесу', 'высоко над облаками']
 words4 = ['и упал', 'и споткнулся', 'и стал рыбой']
+
 
 def get_joke():
     selected_1 = ' '.join(random.sample(words1, 1))
@@ -113,3 +114,9 @@ def get_joke():
     selected_4 = ' '.join(random.sample(words4, 1))
     joke = f"{selected_1} {selected_2} {selected_3} {selected_4}"
     return joke
+
+
+# def get_quiz() -> str:
+#     quiz_url = f"https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple"
+#     quiz_response = requests.get(quiz_url)
+#     quiz_data = quiz_response.json()
