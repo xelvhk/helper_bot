@@ -1,7 +1,7 @@
 from aiogram import Bot, F, Router
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
-from keyboards.keyboards import helper_kb, tasks_kb, weather_kb, happy_kb
+from keyboards.keyboards import helper_kb, tasks_kb, weather_kb, happy_kb, contacts_kb
 from lexicon.lexicon_ru import LEXICON_RU
 from services.services import get_weather, get_joke
 
@@ -62,24 +62,16 @@ async def send_weather(message: Message):
     weather_report = get_weather(city)
     await message.reply(weather_report)
 
-# locations = {}
-
-# @router.message(F.text.in_([LEXICON_RU['ask_weather']]))
-# async def send_weather(message: Message):
-#     weather_report = get_weather(latitude, longitude)
-#     await message.reply(weather_report)
-
 
 @router.message(F.text.in_([LEXICON_RU['gen_joke']]))
 async def send_joke(message: Message):
     joke = get_joke()
     await message.reply(joke)
 
-
-# @router.message(F.text.in_([LEXICON_RU['get_cat']]))
-# async def send_joke(message: Message):
-#     joke = get_joke()
-#     await message.reply(joke)
+@router.message(F.text.in_([LEXICON_RU['contacts']]))
+async def send_contacts(message: Message):
+    await message.answer(text=LEXICON_RU['text_me'],
+                         reply_markup=contacts_kb)
 
 user_tasks = {}
 
@@ -113,7 +105,3 @@ async def clear_tasks(message: Message):
     user_tasks[user_id] = []
     await message.reply("Все задачи удалены.")
 
-
-@router.message(lambda message: message.text and not message.text.startswith('/'))
-async def catch_all(message: Message):
-    await message.reply("Пока без кнопок. Используйте /add_task для добавления задачи, /list для просмотра задач и /clear для удаления всех задач.")

@@ -114,9 +114,3 @@ def get_joke():
     selected_4 = ' '.join(random.sample(words4, 1))
     joke = f"{selected_1} {selected_2} {selected_3} {selected_4}"
     return joke
-
-
-# def get_quiz() -> str:
-#     quiz_url = f"https://opentdb.com/api.php?amount=5&category=18&difficulty=easy&type=multiple"
-#     quiz_response = requests.get(quiz_url)
-#     quiz_data = quiz_response.json()

@@ -1,4 +1,4 @@
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 
 from lexicon.lexicon_ru import LEXICON_RU
 
@@ -7,12 +7,14 @@ from lexicon.lexicon_ru import LEXICON_RU
 kb_button_1 = KeyboardButton(text=LEXICON_RU['weather'])
 kb_button_2 = KeyboardButton(text=LEXICON_RU['tasks'])
 kb_button_3 = KeyboardButton(text=LEXICON_RU['happy'])
+kb_button_4 = KeyboardButton(text=LEXICON_RU['contacts'])
 
 # Создаем клавиатуру функций
 helper_kb = ReplyKeyboardMarkup(
     keyboard=[[kb_button_1],
               [kb_button_2],
-              [kb_button_3]],
+              [kb_button_3],
+              [kb_button_4]],
     resize_keyboard=True
 )
 
@@ -49,3 +51,12 @@ happy_kb = ReplyKeyboardMarkup(
     resize_keyboard=True,
     input_field_placeholder='Нажмите кнопку, чтобы сгенерировать шутку'
 )
+
+contacts_url_1 = InlineKeyboardButton( text='GitHub', url='https://github.com/xelvhk')
+contacts_url_2 = InlineKeyboardButton( text='Telegram', url='https://t.me/hex_lex')
+contacts_url_3 = InlineKeyboardButton( text='Instagram', url='https://instagram.com/days_of_nothing')
+
+contacts_kb = InlineKeyboardMarkup(
+    inline_keyboard=[[contacts_url_1],
+                     [contacts_url_2],
+                     [contacts_url_3]])
