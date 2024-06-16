@@ -8,3 +8,10 @@ Here’s what it can do:
 <li><b>Generate a joke:</b><br>Cheer yourself up with a random joke.</li>
 </ul>
 <a href="https://t.me/virhelp_bot">Demo</a>
+
+### Things to do:
+<ul>
+<li>Clothing recommendations for weather forecast</li>
+<li>Recording tasks in a database</li>
+<li>Simple games</li>
+</ul>
