@@ -18,19 +18,6 @@ helper_kb = ReplyKeyboardMarkup(
     resize_keyboard=True
 )
 
-task_button_1 = KeyboardButton(text=LEXICON_RU['add_task'])
-task_button_2 = KeyboardButton(text=LEXICON_RU['show_task'])
-task_button_3 = KeyboardButton(text=LEXICON_RU['back'])
-
-# Создаем объект клавиатуры для задач
-tasks_kb = ReplyKeyboardMarkup(
-    keyboard=[[task_button_1],
-              [task_button_2],
-              [task_button_3]],
-    resize_keyboard=True,
-    input_field_placeholder='Используйте /add_task для добавления задачи, /list для просмотра задач и /clear для удаления всех задач.'
-)
-
 weather_button_1 = KeyboardButton(text=LEXICON_RU['ask_weather'])
 weather_button_2 = KeyboardButton(text=LEXICON_RU['back'])
 
@@ -52,11 +39,22 @@ happy_kb = ReplyKeyboardMarkup(
     input_field_placeholder='Нажмите кнопку, чтобы сгенерировать шутку'
 )
 
-contacts_url_1 = InlineKeyboardButton( text='GitHub', url='https://github.com/xelvhk')
-contacts_url_2 = InlineKeyboardButton( text='Telegram', url='https://t.me/hex_lex')
-contacts_url_3 = InlineKeyboardButton( text='Instagram', url='https://instagram.com/days_of_nothing')
+contacts_url_1 = InlineKeyboardButton(text='GitHub', url='https://github.com/xelvhk')
+contacts_url_2 = InlineKeyboardButton(text='Telegram', url='https://t.me/hex_lex')
+contacts_url_3 = InlineKeyboardButton(text='Instagram', url='https://instagram.com/days_of_nothing')
 
 contacts_kb = InlineKeyboardMarkup(
     inline_keyboard=[[contacts_url_1],
                      [contacts_url_2],
                      [contacts_url_3]])
+
+
+task_button_1 = InlineKeyboardButton(text=LEXICON_RU['add_task'], callback_data='add_task')
+task_button_2 = InlineKeyboardButton(text=LEXICON_RU['show_task'], callback_data='show_task')
+task_button_3 = InlineKeyboardButton(text=LEXICON_RU['clear_task'], callback_data='clear_task')
+
+# Создаем объект клавиатуры для задач
+tasks_kb = InlineKeyboardMarkup(
+    keyboard=[[task_button_1],
+              [task_button_2],
+              [task_button_3]])
