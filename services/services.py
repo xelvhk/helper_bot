@@ -2,16 +2,6 @@ import random
 from lexicon.lexicon_ru import LEXICON_RU
 import requests
 
-
-# Функция, возвращающая ключ из словаря, по которому
-# хранится значение, передаваемое как аргумент - выбор пользователя
-def normalize_user_answer(user_answer: str) -> str:
-    for key in LEXICON_RU:
-        if LEXICON_RU[key] == user_answer:
-            break
-    return key
-
-
 # Прогноз погоды по API
 def get_weather(city: str) -> str:
     # Координаты города: Saint Petersburg, Russia
