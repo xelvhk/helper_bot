@@ -1,6 +1,5 @@
 import random
 from lexicon.lexicon_ru import LEXICON_RU
-from keyboards.keyboards import tasks_kb, weather_kb, happy_kb
 import requests
 
 # Прогноз погоды по API

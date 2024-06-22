@@ -68,6 +68,7 @@ async def send_joke(message: Message):
     joke = get_joke()
     await message.reply(joke)
 
+
 @router.message(F.text.in_([LEXICON_RU['contacts']]))
 async def send_contacts(message: Message):
     await message.answer(text=LEXICON_RU['text_me'],
@@ -76,7 +77,7 @@ async def send_contacts(message: Message):
 user_tasks = {}
 
 
-@router.message(Command(commands='add_task'))
+@router.message(F.data == 'add_task')
 async def add_task(message: Message):
     task = message.text.replace('/add_task', '')
     if task:
@@ -89,7 +90,7 @@ async def add_task(message: Message):
         await message.reply("Кажется, задача пустая. Введите задачу после команды /add_task")
 
 
-@router.message(Command(commands='list'))
+@router.message(F.data == 'show_task')
 async def list_tasks(message: Message):
     user_id = message.from_user.id
     if user_id in user_tasks and user_tasks[user_id]:
@@ -99,9 +100,8 @@ async def list_tasks(message: Message):
         await message.reply("У вас нет задач.")
 
 
-@router.message(Command(commands='clear'))
+@router.message(F.data == 'clear_task')
 async def clear_tasks(message: Message):
     user_id = message.from_user.id
     user_tasks[user_id] = []
     await message.reply("Все задачи удалены.")
-
