@@ -55,6 +55,6 @@ task_button_3 = InlineKeyboardButton(text=LEXICON_RU['clear_task'], callback_dat
 
 # Создаем объект клавиатуры для задач
 tasks_kb = InlineKeyboardMarkup(
-    keyboard=[[task_button_1],
+    inline_keyboard=[[task_button_1],
               [task_button_2],
               [task_button_3]])
