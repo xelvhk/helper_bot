@@ -2,13 +2,25 @@ import random
 from lexicon.lexicon_ru import LEXICON_RU
 import requests
 
-# Прогноз погоды по API
-def get_weather(city: str) -> str:
-    # Координаты города: Saint Petersburg, Russia
-    longitude = 30.3141
-    latitude = 59.9386
+# Для получения координат любого города
+GEO_API_URL = "https://nominatim.openstreetmap.org/search?"
 
-    # Получаем данные по Open-Meteo API
+# Функция для получения координат города
+def get_city_coordinates(city: str):
+    params = {
+        'q': city,
+        'format': 'json',
+        'limit': 1
+    }
+    response = requests.get(GEO_API_URL, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        if data:
+            return float(data[0]['lat']), float(data[0]['lon'])
+    return None, None
+
+# Прогноз погоды по API
+def get_weather(latitude: float, longitude: float) -> str:
     weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true"
     weather_response = requests.get(weather_url)
     weather_data = weather_response.json()
@@ -53,10 +65,10 @@ def get_weather(city: str) -> str:
         weather_description = weather_descriptions.get(weather_code, "Непонятная погода")
 
         weather_report = (
-            f"Погода в нашем городе сейчас такая:\n"
+            f"Погода в городе сейчас такая:\n"
             f"Чего ждать: {weather_description}\n"
             f"Температура по цельсию: {temperature:.1f}°C\n"
-            f"Скорость ветра: {wind_speed:.1f} м/с, так что не улетишь"
+            f"Скорость ветра: {wind_speed:.1f} м/с"
         )
     else:
         weather_report = "Не могу понять, что за погода"

@@ -3,7 +3,7 @@ from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
 from keyboards.keyboards import helper_kb, tasks_kb, weather_kb, happy_kb, contacts_kb
 from lexicon.lexicon_ru import LEXICON_RU
-from services.services import get_weather, get_joke
+from services.services import get_weather, get_joke,get_city_coordinates
 
 router = Router()
 bot = Bot
@@ -24,10 +24,11 @@ async def process_help_command(message: Message):
 
 
 # Эти хэндлеры срабатывают на любую из кнопок
-@router.message(F.text.in_([LEXICON_RU['weather']]))
-async def process_weather_button(message: Message):
-    await message.answer(text=LEXICON_RU['weather_answer'],
-                         reply_markup=weather_kb)
+@router.message(F.text.in_([LEXICON_RU['ask_weather']]))
+async def weather_command(message: Message):
+    await message.reply(
+        text="Пожалуйста, укажите город для получения погоды.")
+
 
 
 @router.message(F.text.in_([LEXICON_RU['tasks']]))
@@ -55,12 +56,15 @@ async def process_placeholder_command(message: Message):
         text='Выберите что делать с задачами',
     )
 
-
-@router.message(F.text.in_([LEXICON_RU['ask_weather']]))
-async def send_weather(message: Message):
-    city = 'Saint-Petersburg'  # По умолчанию - Петербург
-    weather_report = get_weather(city)
-    await message.reply(weather_report)
+@router.message(lambda message: not message.text.startswith('/'))
+async def get_weather_by_city(message: Message):
+    city = message.text.strip()
+    latitude, longitude = get_city_coordinates(city)
+    if latitude and longitude:
+        weather_report = get_weather(latitude, longitude)
+        await message.reply(weather_report)
+    else:
+        await message.reply("Не могу найти такой город. Пожалуйста, попробуйте другой.")
 
 
 @router.message(F.text.in_([LEXICON_RU['gen_joke']]))
@@ -77,9 +81,9 @@ async def send_contacts(message: Message):
 user_tasks = {}
 
 
-@router.message(F.data == 'add_task')
+@router.message(Command(commands='add_task'))
 async def add_task(message: Message):
-    task = message.text.replace('/add_task', '')
+    task = message.text.replace('/add_task', '').strip()
     if task:
         user_id = message.from_user.id
         if user_id not in user_tasks:
