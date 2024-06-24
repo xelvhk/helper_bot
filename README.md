@@ -16,3 +16,7 @@ Here’s what it can do:
 <li>Recording tasks in a database</li>
 <li>Simple games</li>
 </ul>
+
+### Requirements
+For installing requirements:
+pip install -r requirements.txt
