@@ -48,13 +48,3 @@ contacts_kb = InlineKeyboardMarkup(
                      [contacts_url_2],
                      [contacts_url_3]])
 
-
-task_button_1 = InlineKeyboardButton(text=LEXICON_RU['add_task'], callback_data='add_task')
-task_button_2 = InlineKeyboardButton(text=LEXICON_RU['show_task'], callback_data='show_task')
-task_button_3 = InlineKeyboardButton(text=LEXICON_RU['clear_task'], callback_data='clear_task')
-
-# Создаем объект клавиатуры для задач
-tasks_kb = InlineKeyboardMarkup(
-    inline_keyboard=[[task_button_1],
-              [task_button_2],
-              [task_button_3]])

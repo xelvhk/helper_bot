@@ -1,7 +1,7 @@
 from aiogram import Bot, F, Router
 from aiogram.filters import Command, CommandStart
 from aiogram.types import Message
-from keyboards.keyboards import helper_kb, tasks_kb, weather_kb, happy_kb, contacts_kb
+from keyboards.keyboards import helper_kb, happy_kb, contacts_kb
 from lexicon.lexicon_ru import LEXICON_RU
 from services.services import get_weather, get_joke,get_city_coordinates
 
@@ -33,8 +33,8 @@ async def weather_command(message: Message):
 
 @router.message(F.text.in_([LEXICON_RU['tasks']]))
 async def process_tasks_button(message: Message):
-    await message.answer(text=LEXICON_RU['tasks_answer'],
-                         reply_markup=tasks_kb)
+    await message.answer(
+        text="Используйте комманды для добавления, просмотра и удаления задач:\n /add_task - добавить,\n /show_task - посмотреть,\n /clear_task - удалить")
 
 
 @router.message(F.text.in_([LEXICON_RU['happy']]))
@@ -64,7 +64,7 @@ async def get_weather_by_city(message: Message):
         weather_report = get_weather(latitude, longitude)
         await message.reply(weather_report)
     else:
-        await message.reply("Не могу найти такой город. Пожалуйста, попробуйте другой.")
+        await message.reply("Пожалуйста, укажите город, чтобы я мог вывести погоду.")
 
 
 @router.message(F.text.in_([LEXICON_RU['gen_joke']]))
@@ -81,6 +81,7 @@ async def send_contacts(message: Message):
 user_tasks = {}
 
 
+
 @router.message(Command(commands='add_task'))
 async def add_task(message: Message):
     task = message.text.replace('/add_task', '').strip()
@@ -94,7 +95,7 @@ async def add_task(message: Message):
         await message.reply("Кажется, задача пустая. Введите задачу после команды /add_task")
 
 
-@router.message(F.data == 'show_task')
+@router.message(Command(commands='show_task'))
 async def list_tasks(message: Message):
     user_id = message.from_user.id
     if user_id in user_tasks and user_tasks[user_id]:
@@ -104,8 +105,10 @@ async def list_tasks(message: Message):
         await message.reply("У вас нет задач.")
 
 
-@router.message(F.data == 'clear_task')
+
+@router.message(Command(commands='clear_task'))
 async def clear_tasks(message: Message):
     user_id = message.from_user.id
     user_tasks[user_id] = []
     await message.reply("Все задачи удалены.")
+
