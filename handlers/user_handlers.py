@@ -34,7 +34,7 @@ async def weather_command(message: Message):
 @router.message(F.text.in_([LEXICON_RU['tasks']]))
 async def process_tasks_button(message: Message):
     await message.answer(
-        text="Используйте комманды для добавления, просмотра и удаления задач:\n /add_task - добавить,\n /show_task - посмотреть,\n /clear_task - удалить")
+        text="Используйте команды для добавления, просмотра и удаления задач:\n /add_task - добавить,\n /show_task - посмотреть,\n /clear_task - удалить")
 
 
 @router.message(F.text.in_([LEXICON_RU['happy']]))
@@ -55,17 +55,6 @@ async def process_placeholder_command(message: Message):
     await message.answer(
         text='Выберите что делать с задачами',
     )
-
-@router.message(lambda message: not message.text.startswith('/'))
-async def get_weather_by_city(message: Message):
-    city = message.text.strip()
-    latitude, longitude = get_city_coordinates(city)
-    if latitude and longitude:
-        weather_report = get_weather(latitude, longitude)
-        await message.reply(weather_report)
-    else:
-        await message.reply("Пожалуйста, укажите город, чтобы я мог вывести погоду.")
-
 
 @router.message(F.text.in_([LEXICON_RU['gen_joke']]))
 async def send_joke(message: Message):
@@ -112,3 +101,12 @@ async def clear_tasks(message: Message):
     user_tasks[user_id] = []
     await message.reply("Все задачи удалены.")
 
+@router.message(lambda message: not message.text.startswith('/'))
+async def get_weather_by_city(message: Message):
+    city = message.text.strip()
+    latitude, longitude = get_city_coordinates(city)
+    if latitude and longitude:
+        weather_report = get_weather(latitude, longitude)
+        await message.reply(weather_report)
+    else:
+        await message.reply(f"Пожалуйста, укажите город, чтобы я мог вывести погоду.")

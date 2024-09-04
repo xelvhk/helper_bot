@@ -24,6 +24,7 @@ def get_weather(latitude: float, longitude: float) -> str:
     weather_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true"
     weather_response = requests.get(weather_url)
     weather_data = weather_response.json()
+    print(weather_url)
 
     if weather_response.status_code == 200 and "current_weather" in weather_data:
         # Обработка полученной информации
