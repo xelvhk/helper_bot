@@ -1,22 +1,42 @@
-# Telegram helper bot on Aiogram
-### Content
-This bot is under construction.
-Here’s what it can do:
-<ul>
-<li><b>Show the weather:</b><br>Get current weather information for your city.</li>
-<li><b>Add and view tasks:</b><br>Manage your tasks with an easy-to-use to-do list.</li>
-<li><b>Generate a joke:</b><br>Cheer yourself up with a random joke.</li>
-<li><b>Show contacts.</b></li>
-</ul>
-<a href="https://t.me/virhelp_bot">Demo</a>
+# helper_bot
 
-### Things to do:
-<ul>
-<li>Clothing recommendations for weather forecast</li>
-<li>Recording tasks in a database</li>
-<li>Simple games</li>
-</ul>
+Virtual helper Telegram bot on Aiogram
 
-### Requirements
-For installing requirements:
-pip install -r requirements.txt
+Language: **English** | [Русский](README.ru.md)
+
+## Problem
+- This project solves a practical development or automation task.
+- The goal is to provide a clear implementation that is easy to run and extend.
+
+## Stack
+- Primary language: Python
+- Project-specific libraries and tools (see source files)
+
+## Setup
+```bash
+git clone https://github.com/xelvhk/helper_bot
+cd helper_bot
+# install dependencies (if present)
+# copy .env.example to .env (if present)
+# run the project
+```
+
+## Architecture
+- Entry points: application scripts and main modules in the repository root.
+- Core logic: domain-specific modules grouped by responsibility.
+- Data layer: local files/database/adapters depending on project scope.
+
+## Demo
+- Add screenshots/GIF or usage examples for key flows.
+- If deployed, add production URL.
+
+## Roadmap
+- [ ] Add/refresh setup instructions for zero-friction onboarding.
+- [ ] Add/update tests for critical paths.
+- [ ] Improve docs and examples for real-world usage.
+
+## Status
+Active development
+
+## License
+GNU AGPLv3. See [LICENSE](LICENSE).
