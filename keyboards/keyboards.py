@@ -40,7 +40,7 @@ happy_kb = ReplyKeyboardMarkup(
 )
 
 contacts_url_1 = InlineKeyboardButton(text='GitHub', url='https://github.com/xelvhk')
-contacts_url_2 = InlineKeyboardButton(text='Telegram', url='https://t.me/hex_lex')
+contacts_url_2 = InlineKeyboardButton(text='Telegram', url='https://t.me/xelvhk')
 contacts_url_3 = InlineKeyboardButton(text='Instagram', url='https://instagram.com/days_of_nothing')
 
 contacts_kb = InlineKeyboardMarkup(
